@@ -24,7 +24,6 @@ class MenuRemoteDataSourceImpl @Inject constructor() :
             val webServiceUrl = "http://kasimadalan.pe.hu/yemekler/tum_yemekler.php"
 
             val requestToUrl = StringRequest(Request.Method.GET, webServiceUrl, { responseOfUrl ->
-
                 try{
                     val jsonObj = JSONObject(responseOfUrl)
                     val foods = jsonObj.getJSONArray("yemekler")
@@ -32,12 +31,12 @@ class MenuRemoteDataSourceImpl @Inject constructor() :
                     for(index in 0 until foods.length()){
                         val foodData = foods.getJSONObject(index)
 
-                        val yemek_id = foodData.getInt("yemek_id")
-                        val yemek_adi = foodData.getString("yemek_adi")
-                        val yemek_resim_adi = foodData.getString("yemek_resim_adi")
-                        val yemek_fiyat = foodData.getInt("yemek_fiyat")
+                        val foodId = foodData.getInt("yemek_id")
+                        val foodName = foodData.getString("yemek_adi")
+                        val foodImagePath = foodData.getString("yemek_resim_adi")
+                        val foodPrice = foodData.getInt("yemek_fiyat")
 
-                        val food = Food(yemek_id, yemek_adi, yemek_resim_adi, yemek_fiyat)
+                        val food = Food(foodId, foodName, foodImagePath, foodPrice)
                         foodList.add(food)
                     }
                     flowChannel.sendBlocking(foodList)
@@ -53,13 +52,14 @@ class MenuRemoteDataSourceImpl @Inject constructor() :
             Volley.newRequestQueue(context).add(requestToUrl)
         }
     }
+    @FlowPreview
     override suspend fun searchFood(context: Context, keyWord: String): Flow<List<Food>?> {
         return flowViaChannel { flowChannel ->
             val foodList: ArrayList<Food> = arrayListOf()
             val webServiceUrl = "http://kasimadalan.pe.hu/yemekler/tum_yemekler_arama.php"
 
             val requestToUrl = object : StringRequest(
-                Request.Method.POST,
+                Method.POST,
                 webServiceUrl,
                 Response.Listener { responseOfUrl ->
                     foodList.clear()
@@ -69,20 +69,19 @@ class MenuRemoteDataSourceImpl @Inject constructor() :
 
                         for (index in 0 until foodsData.length()) {
                             val foods = foodsData.getJSONObject(index)
-                            val yemek_id = foods.getInt("yemek_id")
-                            val yemek_adi = foods.getString("yemek_adi")
-                            val yemek_resim_adi = foods.getString("yemek_resim_adi")
-                            val yemek_fiyat = foods.getInt("yemek_fiyat")
+                            val foodId = foods.getInt("yemek_id")
+                            val foodName = foods.getString("yemek_adi")
+                            val foodImagePath = foods.getString("yemek_resim_adi")
+                            val foodPrice = foods.getInt("yemek_fiyat")
 
-                            val yemek = Food(yemek_id, yemek_adi, yemek_resim_adi, yemek_fiyat)
+                            val food = Food(foodId, foodName, foodImagePath, foodPrice)
 
-                            foodList.add(yemek)
+                            foodList.add(food)
                         }
                         flowChannel.sendBlocking(foodList)
                     } catch (e: JSONException) {
                         flowChannel.sendBlocking(null)
                     }
-
                 },
                 Response.ErrorListener {
                     flowChannel.sendBlocking(null)

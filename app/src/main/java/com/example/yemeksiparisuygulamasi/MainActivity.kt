@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
-        AppBarConfiguration(setOf(R.id.navigation_menu, R.id.navigation_basket)) // bottom navigation fragmentları tanımladığımız yer.
+        AppBarConfiguration(setOf(R.id.navigation_menu, R.id.navigation_basket))
         navView.setupWithNavController(navController)
     }
 }

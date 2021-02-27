@@ -12,7 +12,7 @@ import com.example.yemeksiparisuygulamasi.R
 import com.example.yemeksiparisuygulamasi.domain.entity.Food
 import com.squareup.picasso.Picasso
 
-class MenuAdapter(private var myContext:Context, private var foodList:ArrayList<Food>, private val listenerMenu: MenuItemClickListener)
+class MenuAdapter(private var context:Context, private var foodList:ArrayList<Food>, private val listenerMenu: MenuItemClickListener)
     :RecyclerView.Adapter<MenuAdapter.CardViewDesignHolder>(){
     inner class CardViewDesignHolder(design:View) : RecyclerView.ViewHolder(design){
         var parentCardView : CardView = design.findViewById(R.id.parent_card_view)
@@ -21,16 +21,14 @@ class MenuAdapter(private var myContext:Context, private var foodList:ArrayList<
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewDesignHolder {
-        val cardDesign = LayoutInflater.from(myContext).inflate(R.layout.food_item_list, parent, false)
+        val cardDesign = LayoutInflater.from(context).inflate(R.layout.food_item_list, parent, false)
         return CardViewDesignHolder(cardDesign)
     }
 
     override fun onBindViewHolder(holder: CardViewDesignHolder, position: Int) {
         val food = foodList[position]
-
         holder.foodNameText.text = food.name
-
-        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${food.image_path}"
+        val url = String.format(context.getString(R.string.image_base_path), food.image_path)
         Picasso.get().load(url).into(holder.foodImage)
 
         holder.parentCardView.setOnClickListener {

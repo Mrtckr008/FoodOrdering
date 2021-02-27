@@ -19,14 +19,8 @@ import kotlinx.coroutines.launch
 
 class BasketViewModel @ViewModelInject constructor(
     private val getFoodsFromBasketUseCase: GetFoodsFromBasketUseCase,
-    private val addFoodToBasketUseCase: AddFoodToBasketUseCase,
     private val removeFoodFromBasketUseCase: RemoveFoodFromBasketUseCase
 ) : BaseViewModel() {
-
-    private val _addedFoodToBasket = MutableLiveData<ResultData<Unit>>()
-    val addedFoodToBasket: MutableLiveData<ResultData<Unit>>
-        get() = _addedFoodToBasket
-
     private val _removedFoodToBasket = MutableLiveData<ResultData<Unit>>()
     val removedFoodToBasket: MutableLiveData<ResultData<Unit>>
         get() = _removedFoodToBasket
@@ -40,16 +34,6 @@ class BasketViewModel @ViewModelInject constructor(
             getFoodsFromBasketUseCase.invoke(context).collect { it ->
                 handleTask(it) {
                     foodsListFromBasket.postValue(it)
-                }
-            }
-        }
-    }
-
-    fun addFoodsToBasket(context:Context, food: Food, counter: Int){
-        viewModelScope.launch(Dispatchers.IO) {
-            addFoodToBasketUseCase.invoke(context, food, counter).collect { it ->
-                handleTask(it) {
-                    addedFoodToBasket.postValue(it)
                 }
             }
         }

@@ -2,6 +2,7 @@ package com.example.yemeksiparisuygulamasi.ui.basket
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -23,21 +24,6 @@ class BasketFragment : BaseFragment<BasketViewModel, FragmentBasketBinding>(){
     override val viewModel: BasketViewModel by viewModels()
 
     override fun observeViewModel() {
-        viewModel.addedFoodToBasket.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is ResultData.Success -> {
-                    // Todo : Ekrana ekleme başarılı oldu toastı çıksın
-                }
-                is ResultData.Failed -> {
-                    // Todo : Ekrana ekleme başarısız oldu toastı çıksın
-                }
-                is ResultData.Loading -> {
-
-                }
-            }
-        })
-
-
         viewModel.foodsListFromBasket.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ResultData.Success -> {
@@ -74,9 +60,12 @@ class BasketFragment : BaseFragment<BasketViewModel, FragmentBasketBinding>(){
         viewModel.removedFoodToBasket.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ResultData.Success -> {
-                   viewModel.getFoodsFromBasket(this.requireContext())
+                    Toast.makeText(this.requireContext(), this.requireContext().getString(R.string.removed_successfully), Toast.LENGTH_SHORT).show()
+
+                    viewModel.getFoodsFromBasket(this.requireContext())
                 }
                 is ResultData.Failed -> {
+                    Toast.makeText(this.requireContext(), this.requireContext().getString(R.string.removed_successfully), Toast.LENGTH_SHORT).show()
 
                 }
                 is ResultData.Loading -> {

@@ -3,10 +3,27 @@
     <string name="title_menu">Menu</string>
     <string name="title_basket">Basket</string>
 
-    <string name="yemek_adi">Yemek Adı</string>
-    <string name="adet">Adet:</string>
-    <string name="toplam_tutar">Toplam Tutar:</string>
-    <string name="genel_toplam">Genel Toplam:</string>
+    <string name="food_name_basket">Product Name</string>
+    <string name="quantity">Quantity:</string>
+    <string name="sum_price">Sum Price:</string>
+
+    <!-- Menu Fragment -->
+    <string name="products_get_error">Products are not available at the moment, please try again later.</string>
+    <string name="no_search_result">No search results were found.</string>
+
+    <string name="added_successfully">The product has been added to the cart.</string>
+    <string name="added_failed">The product could not be added to the cart.</string>
+
+    <!-- Basket Fragment -->
+    <string name="removed_successfully">The product has been removed from the cart.</string>
+    <string name="removed_failed">The product could not be removed from the cart.</string>
+
+    <!-- Alert Dialog -->
+    <string name="cancel">Cancel</string>
+    <string name="add_to_basket">Add to Basket</string>
+    <string name="add_product_alert_dialog_text">%1$s - %2$s $</string>
+    <string name="image_base_path">http://kasimadalan.pe.hu/yemekler/resimler/%1$s</string>
+    <string name="product_detail">Product Detail</string>
 
 
 </resources>

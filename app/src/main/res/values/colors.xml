@@ -11,4 +11,10 @@
     <color name="red">#ac1900</color>
     <color name="orange">#ef6c00</color>
     <color name="green">#69CD6D</color>
+
+    <color name="palette_1">#456268</color>
+    <color name="palette_2">#79a3b1</color>
+    <color name="palette_3">#d0e8f2</color>
+    <color name="palette_4">#fcf8ec</color>
+
 </resources>

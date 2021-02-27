@@ -13,9 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrderingApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity"></activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

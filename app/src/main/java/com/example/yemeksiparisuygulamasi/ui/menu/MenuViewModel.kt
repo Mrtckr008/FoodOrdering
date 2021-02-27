@@ -21,9 +21,9 @@ class MenuViewModel @ViewModelInject constructor(
     private val addFoodToBasketUseCase: AddFoodToBasketUseCase,
 ) : BaseViewModel() {
 
-    private val foodList = MutableLiveData<ResultData<List<Food>>>()
-    val _foodList: MutableLiveData<ResultData<List<Food>>>
-        get() = foodList
+    private val _foodList = MutableLiveData<ResultData<List<Food>>>()
+    val foodList: MutableLiveData<ResultData<List<Food>>>
+        get() = _foodList
 
     private val _searchedFoodList = MutableLiveData<ResultData<List<Food>>>()
     val searchedFoodList: MutableLiveData<ResultData<List<Food>>>

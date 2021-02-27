@@ -27,7 +27,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
     override val viewModel: MenuViewModel by viewModels()
     private lateinit var navController: NavController
     override fun observeViewModel() {
-        viewModel._foodList.observe(viewLifecycleOwner, Observer {
+        viewModel.foodList.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ResultData.Success -> {
                     binding.menuRecyclerView.setHasFixedSize(true)
@@ -43,7 +43,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
                             })
                 }
                 is ResultData.Failed -> {
-                    Toast.makeText(this.requireContext(), "Ürünler şu an alınamıyor lütfen daha sonra tekrar deneyiniz.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.requireContext(), this.requireContext().getString(R.string.products_get_error), Toast.LENGTH_SHORT).show()
                 }
                 is ResultData.Loading -> {
 
@@ -67,7 +67,21 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
                             })
                 }
                 is ResultData.Failed -> {
-                    Toast.makeText(this.requireContext(), "Aradığınız ürün bulunamadı.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.requireContext(), this.requireContext().getString(R.string.no_search_result), Toast.LENGTH_SHORT).show()
+                }
+                is ResultData.Loading -> {
+
+                }
+            }
+        })
+
+        viewModel.addedFoodToBasket.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ResultData.Success -> {
+                    Toast.makeText(this.requireContext(), this.requireContext().getString(R.string.added_successfully), Toast.LENGTH_SHORT).show()
+                }
+                is ResultData.Failed -> {
+                    Toast.makeText(this.requireContext(), this.requireContext().getString(R.string.added_failed), Toast.LENGTH_SHORT).show()
                 }
                 is ResultData.Loading -> {
 
@@ -92,20 +106,25 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
         })
     }
 
-    @SuppressLint("SetTextI18n")
     fun alertView(food :Food){
         val design = LayoutInflater.from(this.requireContext()).inflate(R.layout.alertview_layout, null)
 
         val alert = AlertDialog.Builder(this.requireContext())
-            .setTitle("Ürün Detayı")
+            .setTitle(this.requireContext().getString(R.string.product_detail))
             .setView(design)
 
         var counter = 1
         design.order_counter_text.text = counter.toString()
+        design.alert_text.text = String.format(
+            this.requireContext().getString(R.string.add_product_alert_dialog_text),
+            food.name,
+            food.price
+        )
 
-        design.alert_text.text = "${food.name} - ${food.price} \u20ba"
+        val url = String.format(
+            this.requireContext().getString(R.string.image_base_path),
+            food.image_path)
 
-        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${food.image_path}"
         Picasso.get().load(url).into(design.alert_food_image)
 
         design.add_button.setOnClickListener {
@@ -119,10 +138,10 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
             }
         }
 
-        alert.setPositiveButton("Sepete Ekle"){ dialogInterface, i->
+        alert.setPositiveButton(this.requireContext().getString(R.string.add_to_basket)){ dialogInterface, i->
             viewModel.addFoodsToBasket(this@MenuFragment.requireContext(),food,counter)
         }
-        alert.setNegativeButton("İptal"){ dialogInterface, i->
+        alert.setNegativeButton(this.requireContext().getString(R.string.cancel)){ dialogInterface, i->
             dialogInterface.dismiss()
         }
         alert.create().show()
