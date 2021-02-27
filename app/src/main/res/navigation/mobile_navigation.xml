@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/navigation_menu"
-        android:name="com.example.yemeksiparisuygulamasi.ui.menu.MenuFragment"
+        android:name="com.mrtckr.foodorder.ui.menu.MenuFragment"
         android:label="@string/title_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/menu_fragment" />
 
     <fragment
         android:id="@+id/navigation_basket"
-        android:name="com.example.yemeksiparisuygulamasi.ui.basket.BasketFragment"
+        android:name="com.mrtckr.foodorder.ui.basket.BasketFragment"
         android:label="@string/title_basket"
-        tools:layout="@layout/fragment_basket" />
+        tools:layout="@layout/basket_fragment" />
 
 </navigation>

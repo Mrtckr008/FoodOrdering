@@ -11,7 +11,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.yemeksiparisuygulamasi"
+        applicationId "com.mrtckr.foodorder"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -35,6 +35,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -81,7 +82,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
 
+    //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
     implementation project(':data')
     implementation project(':domain')
 }
