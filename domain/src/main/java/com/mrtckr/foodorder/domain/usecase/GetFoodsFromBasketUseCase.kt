@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetFoodsFromBasketUseCase @Inject constructor(private val repository: BasketRepository) {
-    operator fun invoke(context: Context): Flow<ResultData<List<Basket>>> {
+    suspend operator fun invoke(context: Context): Flow<ResultData<List<Basket>>> {
         return repository.getBasket(context)
     }
 }

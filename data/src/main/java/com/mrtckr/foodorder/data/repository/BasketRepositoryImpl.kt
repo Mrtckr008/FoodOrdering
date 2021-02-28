@@ -22,7 +22,7 @@ class BasketRepositoryImpl @Inject constructor(private val dataSource: BasketRem
         return dataSource.removeBasket(context,foodFromBasket)
     }
 
-    override fun getBasket(context: Context): Flow<ResultData<List<Basket>>> = flow {
+    override suspend fun getBasket(context: Context): Flow<ResultData<List<Basket>>> = flow {
         emit(ResultData.Loading())
         val commentsList = dataSource.getBasket(context)
         commentsList.collect {

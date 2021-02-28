@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.alertview_layout.view.*
 
 @AndroidEntryPoint
-open class MenuFragment : BaseFragment<MenuViewModel, MenuFragmentBinding>() {
+class MenuFragment : BaseFragment<MenuViewModel, MenuFragmentBinding>() {
     override val layoutRes: Int = R.layout.menu_fragment
     override val viewModel: MenuViewModel by viewModels()
     private lateinit var navController: NavController

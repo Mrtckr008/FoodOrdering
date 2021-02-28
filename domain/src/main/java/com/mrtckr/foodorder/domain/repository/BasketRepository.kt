@@ -9,5 +9,5 @@ import kotlinx.coroutines.flow.Flow
 interface BasketRepository {
     suspend fun addBasket(context: Context, food: Food, counter: Int): Flow<ResultData<Unit>>
     suspend fun removeBasket(context: Context, foodFromBasket: Basket): Flow<ResultData<Unit>>
-    fun getBasket(context: Context):  Flow<ResultData<List<Basket>>>
+    suspend fun getBasket(context: Context):  Flow<ResultData<List<Basket>>>
 }
