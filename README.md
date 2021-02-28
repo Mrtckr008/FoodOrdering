@@ -224,7 +224,7 @@ MVVM & Clean architecture and some jetpack libraries such as Coroutine-Hilt-Navi
     }
     
 # BasketRemoteDataSourceImpl in Data module. 
-Not: I used Volley for api operations. Because I wanted to try it to compare with Retrofit. USING RETROFIT IS RECOMMENDED.
+Note: I used Volley for api operations. Because I wanted to try it to compare with Retrofit. USING RETROFIT IS RECOMMENDED.
 
     class BasketRemoteDataSourceImpl @Inject constructor() :
     BasketRemoteDataSource {
