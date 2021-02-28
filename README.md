@@ -1,3 +1,5 @@
+MVVM & Clean architecture and some jetpack libraries such as Coroutine-Hilt-Navigation Component-DataBinding were used in the project.
+
 # BaseFragment
 
     abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding> : Fragment() {
@@ -322,3 +324,7 @@ Not: I used Volley for api operations. Because I wanted to try it to compare wit
         return GetFoodsFromBasketUseCase(repository)
     }
     }
+
+    
+# The code architecture of the application looks like this. 
+<img width="471" alt="Screen Shot 2021-02-28 at 13 21 11" src="https://user-images.githubusercontent.com/32914909/109415147-04730900-79c8-11eb-9e17-f4f3a372bdf1.png">
